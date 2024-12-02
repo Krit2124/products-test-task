@@ -1,0 +1,16 @@
+.products {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 190px);
+    justify-content: space-between;
+    gap: 20px;
+
+    @media (max-width: 642px) {
+      justify-content: center;
+    }
+  }
+}

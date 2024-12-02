@@ -39,7 +39,21 @@ export const fetchProducts = createAsyncThunk(
 export const ProductsSlice = createSlice({
   name: "products",
   initialState,
-  reducers: {},
+  reducers: {
+    likeProduct: (state, action: PayloadAction<number>) => {
+      const product = state.products.find(
+        (product) => product.id === action.payload
+      );
+      if (product) {
+        product.isLiked = !product.isLiked;
+      }
+    },
+    deleteProduct: (state, action: PayloadAction<number>) => {
+      state.products = state.products.filter(
+        (product) => product.id !== action.payload
+      );
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchProducts.pending.type, (state) => {
@@ -55,11 +69,11 @@ export const ProductsSlice = createSlice({
       )
       .addCase(fetchProducts.rejected.type, (state, action: any) => {
         state.isLoading = false;
-        state.error = action.error.message;
+        state.error = action.payload;
       });
   },
 });
 
-export const {} = ProductsSlice.actions;
+export const { likeProduct, deleteProduct } = ProductsSlice.actions;
 
 export default ProductsSlice.reducer;

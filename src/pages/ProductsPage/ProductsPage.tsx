@@ -1,16 +1,18 @@
-import { useEffect } from 'react';
+import { useEffect } from "react";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import { useAppDispatch, useAppSelector } from '@/shared/hooks/redux';
-import { fetchProducts } from '@/shared/store/reducers/productsSlice';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSpinner } from '@fortawesome/free-solid-svg-icons';
-import { ProductCard } from '@/entities/ProductCard';
+import { useAppDispatch, useAppSelector } from "@/shared/hooks/redux";
+import { fetchProducts } from "@/shared/store/reducers/productsSlice";
+import { ProductCard } from "@/entities/ProductCard";
 
-import styles from './index.module.scss'
+import styles from "./index.module.scss";
 
 const ProductsPage = () => {
   const dispatch = useAppDispatch();
-  const { products, isLoading } = useAppSelector(state => state.productsReducer);
+  const { products, isLoading, error } = useAppSelector(
+    (state) => state.productsReducer
+  );
 
   useEffect(() => {
     dispatch(fetchProducts(1));
@@ -18,18 +20,27 @@ const ProductsPage = () => {
 
   if (isLoading) {
     return (
-      <div className='container container_centered'>
-        <FontAwesomeIcon icon={faSpinner} spin size='3x' />
+      <div className="container container_centered">
+        <FontAwesomeIcon icon={faSpinner} spin size="3x" />
       </div>
-    )
+    );
   }
 
   return (
-    <div className='container'>
+    <div className={`container ${styles.products}`}>
       <h1>Products</h1>
-      {products.map((product) => (
-        <ProductCard key={product.id} id={product.id} title={product.title} thumbnailUrl={product.thumbnailUrl} isLiked={product.isLiked || false} />
-      ))}
+      {error && <p>{error}</p>}
+      <div className={styles.products__list}>
+        {products.map((product) => (
+          <ProductCard
+            key={product.id}
+            id={product.id}
+            title={product.title}
+            thumbnailUrl={product.thumbnailUrl}
+            isLiked={product.isLiked || false}
+          />
+        ))}
+      </div>
     </div>
   );
 };
