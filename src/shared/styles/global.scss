@@ -1,0 +1,71 @@
+// Основные настройки
+:root {
+  font-size: 16px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+}
+
+// Текст
+h1 {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+h4 {
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+h5 {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+h6 {
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+a {
+  text-decoration: none;
+}
+
+// Контейнеры
+.container {
+  width: 1196px;
+  max-width: 95vw;
+  margin: 0 auto;
+  padding: 30px 0;
+
+  &_centered {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    height: 100vh;
+  }
+}
+
+// Анимация для спиннеров
+@keyframes spinner {
+  to { transform: rotate(360deg); }
+}
+.fa-spinner {
+  animation: spinner 1s linear infinite;
+}
