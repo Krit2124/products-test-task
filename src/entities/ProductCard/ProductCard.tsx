@@ -1,8 +1,12 @@
 import { FC } from "react";
+import { Link } from "react-router-dom";
 
 import styles from "./index.module.scss";
 import { ButtonLike } from "@/shared/ui/ButtonLike";
 import { ButtonDelete } from "@/shared/ui/ButtonDelete";
+import { useAppDispatch } from "@/shared/hooks/redux";
+import { deleteProduct, likeProduct } from "@/shared/store/reducers/productsSlice";
+import ButtonEdit from "@/shared/ui/ButtonEdit/ButtonEdit";
 
 interface ProductCardProps {
   id: number;
@@ -12,15 +16,28 @@ interface ProductCardProps {
 }
 
 const ProductCard: FC<ProductCardProps> = ({ id, title, thumbnailUrl, isLiked }) => {
+  const dispatch = useAppDispatch();
+  
+  // Обработка удаления товара
+  function handleDelete() {
+    dispatch(deleteProduct(id));
+  }
+
+  // Обработка добавления/удаления из избранного
+  function handleLike() {
+    dispatch(likeProduct(id));
+  }
+
   return (
-    <div className={styles.card}>
+    <Link to={`/products/${id}`} className={styles.card}>
       <h3>{title}</h3>
       <div className={styles.card__buttons}>
-        <ButtonLike id={id} isLiked={isLiked}/>
-        <ButtonDelete id={id} />
+        <ButtonLike isLiked={isLiked || false} handleClick={handleLike}/>
+        <ButtonEdit link={`/edit-product/${id}`}/>
+        <ButtonDelete handleClick={handleDelete} />
       </div>
       <img src={thumbnailUrl} alt="product" />
-    </div>
+    </Link>
   );
 };
 

@@ -1,10 +1,13 @@
 import { useEffect } from "react";
-import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { faPlus, faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import ReactPaginate from "react-paginate";
+import { Link } from "react-router-dom";
 
 import { useAppDispatch, useAppSelector } from "@/shared/hooks/redux";
-import { fetchProducts } from "@/shared/store/reducers/productsSlice";
+import { getProducts, setEmptyChosenProduct } from "@/shared/store/reducers/productsSlice";
 import { ProductCard } from "@/entities/ProductCard";
+import { useProductFilters } from "@/shared/hooks/useProductFilters";
 
 import styles from "./index.module.scss";
 
@@ -14,8 +17,12 @@ const ProductsPage = () => {
     (state) => state.productsReducer
   );
 
+  const { paginationProps } = useProductFilters({ initialPage: 1 });
+
+  // Получаем первичные данные и обнуляем выбранный товар
   useEffect(() => {
-    dispatch(fetchProducts(1));
+    dispatch(getProducts(1));
+    dispatch(setEmptyChosenProduct())
   }, []);
 
   if (isLoading) {
@@ -28,19 +35,33 @@ const ProductsPage = () => {
 
   return (
     <div className={`container ${styles.products}`}>
-      <h1>Products</h1>
+      <div className={styles.products__title}>
+        <h1>Products</h1>
+        <Link to="/create-product">
+          <FontAwesomeIcon icon={faPlus} spin size="3x" />
+        </Link>
+      </div>
+      
       {error && <p>{error}</p>}
       <div className={styles.products__list}>
         {products.map((product) => (
           <ProductCard
             key={product.id}
-            id={product.id}
+            id={product.id || 1}
             title={product.title}
             thumbnailUrl={product.thumbnailUrl}
             isLiked={product.isLiked || false}
           />
         ))}
       </div>
+
+      <ReactPaginate
+        {...paginationProps}
+        nextLabel=">"
+        previousLabel="<"
+        containerClassName={styles.pagination} // Класс для контейнера пагинации
+        activeClassName={styles.pagination__active} // Класс для активной страницы
+      />
     </div>
   );
 };

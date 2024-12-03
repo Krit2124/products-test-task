@@ -6,7 +6,7 @@ const MainPage = () => {
     <div className="container container_centered">
       <h1>Тестовое задание для ALFA</h1>
 
-      <Link to="/products" onClick={() => window.history.back()}>
+      <Link to="/products">
         Перейти на страницу товаров
       </Link>
     </div>

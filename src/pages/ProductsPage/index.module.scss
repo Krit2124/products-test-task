@@ -3,6 +3,16 @@
   flex-direction: column;
   gap: 30px;
 
+  &__title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    svg {
+      color: black;
+    }
+  }
+
   &__list {
     display: grid;
     grid-template-columns: repeat(auto-fit, 190px);
@@ -11,6 +21,24 @@
 
     @media (max-width: 642px) {
       justify-content: center;
+    }
+  }
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  list-style: none;
+
+  li a {
+    cursor: pointer;
+  }
+
+  &__active {
+    color: #0d6efd;
+    a {
+      cursor: default !important;
     }
   }
 }

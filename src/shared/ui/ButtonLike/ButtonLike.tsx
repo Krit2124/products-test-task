@@ -3,26 +3,26 @@ import { faHeart as faHeartFull } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FC } from "react";
 
-import { useAppDispatch } from "@/shared/hooks/redux";
-import { likeProduct } from "@/shared/store/reducers/productsSlice";
-
-import styles from "./index.module.scss"
-
 interface ButtonLikeProps {
-  id: number;
   isLiked: boolean;
+  handleClick: VoidFunction;
 }
 
-const ButtonLike: FC<ButtonLikeProps> = ({ id, isLiked }) => {
-  const dispatch = useAppDispatch();
-  
-  function handleClick() {
-    dispatch(likeProduct(id));
-  }
+const ButtonLike: FC<ButtonLikeProps> = ({ isLiked, handleClick }) => {
+  const handleClickWithoutDefaultAction = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    event.preventDefault();
+    handleClick();
+  };
 
   return (
-    <button onClick={handleClick} className={styles.buttonLike}>
-      <FontAwesomeIcon icon={isLiked ? faHeartFull : faHeartEmpty} size="2x"/>
+    <button
+      onClick={(event) => handleClickWithoutDefaultAction(event)}
+      className="button_icon"
+      title={isLiked ? "Delete from favorites" : "Add to favorites"}
+    >
+      <FontAwesomeIcon icon={isLiked ? faHeartFull : faHeartEmpty} size="3x" />
     </button>
   );
 };

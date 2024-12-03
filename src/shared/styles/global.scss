@@ -1,6 +1,6 @@
 // Основные настройки
 :root {
-  font-size: 16px;
+  font-size: 18px;
 }
 
 * {
@@ -68,4 +68,18 @@ a {
 }
 .fa-spinner {
   animation: spinner 1s linear infinite;
+}
+
+// Кнопки
+button {
+  cursor: pointer;
+}
+
+.button_icon {
+  border: none;
+  color: black;
+  svg {
+    max-width: 30px;
+    max-height: 30px;
+  }
 }
