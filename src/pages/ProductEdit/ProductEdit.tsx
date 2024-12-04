@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { ButtonGoBack } from "@/shared/ui/ButtonGoBack";
 import { ProductForm } from "@/features/ProductForm";
 import { IProduct } from "@/shared/types/products";
-import { editProduct, getProduct, saveProduct } from "@/shared/store/reducers/productsSlice";
+import { editProduct, getProduct } from "@/shared/store/reducers/productsSlice";
 import { useAppDispatch, useAppSelector } from "@/shared/hooks/redux";
 
 import styles from "./index.module.scss";

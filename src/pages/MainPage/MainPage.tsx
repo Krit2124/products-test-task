@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const MainPage = () => {
   return (
     <div className="container container_centered">
-      <h1>Тестовое задание для ALFA</h1>
+      <h1>Тестовое задание</h1>
 
       <Link to="/products">
         Перейти на страницу товаров
