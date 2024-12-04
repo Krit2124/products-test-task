@@ -68,6 +68,7 @@ const ProductInfo = () => {
             <ButtonLike
               isLiked={chosenProduct?.isLiked || false}
               handleClick={handleLike}
+              title={chosenProduct?.isLiked ? "Delete from favorites" : "Add to favorites"}
             />
             <ButtonEdit link={`/edit-product/${id}`} />
             <ButtonDelete handleClick={handleDelete} />

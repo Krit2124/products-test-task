@@ -5,10 +5,11 @@ import { FC } from "react";
 
 interface ButtonLikeProps {
   isLiked: boolean;
+  title: string;
   handleClick: VoidFunction;
 }
 
-const ButtonLike: FC<ButtonLikeProps> = ({ isLiked, handleClick }) => {
+const ButtonLike: FC<ButtonLikeProps> = ({ isLiked, title, handleClick }) => {
   const handleClickWithoutDefaultAction = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
@@ -20,7 +21,7 @@ const ButtonLike: FC<ButtonLikeProps> = ({ isLiked, handleClick }) => {
     <button
       onClick={(event) => handleClickWithoutDefaultAction(event)}
       className="button_icon"
-      title={isLiked ? "Delete from favorites" : "Add to favorites"}
+      title={title}
     >
       <FontAwesomeIcon icon={isLiked ? faHeartFull : faHeartEmpty} size="3x" />
     </button>

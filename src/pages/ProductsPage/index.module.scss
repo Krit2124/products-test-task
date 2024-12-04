@@ -8,8 +8,15 @@
     justify-content: space-between;
     align-items: center;
     
-    svg {
-      color: black;
+    &__buttons {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      * svg {
+        max-width: 44px !important;
+        max-height: 44px !important;
+      }
     }
   }
 

@@ -5,19 +5,27 @@ import styles from "./index.module.scss";
 import { ButtonLike } from "@/shared/ui/ButtonLike";
 import { ButtonDelete } from "@/shared/ui/ButtonDelete";
 import { useAppDispatch } from "@/shared/hooks/redux";
-import { deleteProduct, likeProduct } from "@/shared/store/reducers/productsSlice";
+import {
+  deleteProduct,
+  likeProduct,
+} from "@/shared/store/reducers/productsSlice";
 import ButtonEdit from "@/shared/ui/ButtonEdit/ButtonEdit";
 
 interface ProductCardProps {
   id: number;
-  title: string,
+  title: string;
   thumbnailUrl: string;
   isLiked: boolean;
 }
 
-const ProductCard: FC<ProductCardProps> = ({ id, title, thumbnailUrl, isLiked }) => {
+const ProductCard: FC<ProductCardProps> = ({
+  id,
+  title,
+  thumbnailUrl,
+  isLiked,
+}) => {
   const dispatch = useAppDispatch();
-  
+
   // Обработка удаления товара
   function handleDelete() {
     dispatch(deleteProduct(id));
@@ -32,8 +40,12 @@ const ProductCard: FC<ProductCardProps> = ({ id, title, thumbnailUrl, isLiked })
     <Link to={`/products/${id}`} className={styles.card}>
       <h3>{title}</h3>
       <div className={styles.card__buttons}>
-        <ButtonLike isLiked={isLiked || false} handleClick={handleLike}/>
-        <ButtonEdit link={`/edit-product/${id}`}/>
+        <ButtonLike
+          isLiked={isLiked || false}
+          handleClick={handleLike}
+          title={isLiked ? "Delete from favorites" : "Add to favorites"}
+        />
+        <ButtonEdit link={`/edit-product/${id}`} />
         <ButtonDelete handleClick={handleDelete} />
       </div>
       <img src={thumbnailUrl} alt="product" />

@@ -64,13 +64,15 @@ a {
 
 // Анимация для спиннеров
 @keyframes spinner {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 .fa-spinner {
   animation: spinner 1s linear infinite;
 }
 
-// Кнопки
+// Кнопки и поля ввода
 button {
   cursor: pointer;
 }
@@ -82,4 +84,11 @@ button {
     max-width: 30px;
     max-height: 30px;
   }
+}
+
+.input_default {
+  border: 2px solid black;
+  border-radius: 16px;
+  padding: 8px 15px;
+  font-size: 16px;
 }

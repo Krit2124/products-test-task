@@ -47,6 +47,7 @@ const ProductForm: FC<ProductFormProps> = ({ product, handleSubmit }) => {
           type="text"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
+          className="input_default"
         />
       </label>
 
@@ -56,6 +57,7 @@ const ProductForm: FC<ProductFormProps> = ({ product, handleSubmit }) => {
           type="number"
           value={albumId}
           onChange={(e) => setAlbumId(Number(e.target.value))}
+          className="input_default"
         />
       </label>
 
@@ -65,6 +67,7 @@ const ProductForm: FC<ProductFormProps> = ({ product, handleSubmit }) => {
           type="text"
           value={link}
           onChange={(e) => setLink(e.target.value)}
+          className="input_default"
         />
       </label>
 
@@ -74,6 +77,7 @@ const ProductForm: FC<ProductFormProps> = ({ product, handleSubmit }) => {
           type="text"
           value={linkThumbnail}
           onChange={(e) => setLinkThumbnail(e.target.value)}
+          className="input_default"
         />
       </label>
 

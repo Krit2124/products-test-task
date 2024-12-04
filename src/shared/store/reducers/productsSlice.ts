@@ -50,7 +50,7 @@ export const getProduct = createAsyncThunk(
 
       // Попытка найти товар в уже загруженных продуктах
       const existingProduct = state.productsReducer.products.find(
-        (product) => product.id === productId
+        (product: IProduct) => product.id === productId
       );
 
       if (existingProduct) {
